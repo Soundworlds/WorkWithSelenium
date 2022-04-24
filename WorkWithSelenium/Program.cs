@@ -6,7 +6,7 @@ using Xunit;
 
 namespace Test
 {
-    //[TestFixture]
+    
     public class TestClass
     {
 
@@ -33,7 +33,7 @@ namespace Test
         
         public static void SetUp()
         {
-            //var driver = new FirefoxDriver(@"C:\Downloads\");
+            
             new DriverManager().SetUpDriver(new FirefoxConfig());
             _webDriver = new FirefoxDriver(driverFirefoxPath);
         }
@@ -51,8 +51,8 @@ namespace Test
             Assert.True(_webDriver.Title.Contains("Google"));
 
             //_webDriver.FindElement(By.Name("q")).SendKeys("webdriver" + Keys.Enter);
-            IWebElement fruits = _webDriver.FindElement(By.ClassName("gb_Tc"));
-            fruits.Click();
+            IWebElement googleAppsButton = _webDriver.FindElement(By.ClassName("gb_Tc"));
+            googleAppsButton.Click();
             _Title = _webDriver.Title;
             _Url = _webDriver.Url;
         }
