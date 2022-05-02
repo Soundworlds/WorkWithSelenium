@@ -1,5 +1,7 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.Edge;
+using OpenQA.Selenium.Chrome;
 using WebDriverManager;
 using WebDriverManager.DriverConfigs.Impl;
 using Xunit;
@@ -10,8 +12,10 @@ namespace Test
     public class TestClass
     {
 
+        private static string browserName = "Edge"; // Chrome, Firefox or Edge - three names for testing
+
         private static IWebDriver _webDriver;
-        private static string driverFirefoxPath = Environment.CurrentDirectory;
+        private static string driverPath = Environment.CurrentDirectory;
         private static string _Title = "";
         private static string _Url = "";
 
@@ -28,9 +32,22 @@ namespace Test
         }
         
         public static void SetUp()
-        { 
-            new DriverManager().SetUpDriver(new FirefoxConfig());
-            _webDriver = new FirefoxDriver(driverFirefoxPath);
+        {
+            if (browserName == "Firefox")
+            {
+                new DriverManager().SetUpDriver(new FirefoxConfig());
+                _webDriver = new FirefoxDriver(driverPath);
+            }
+            else if (browserName == "Edge")
+            {
+                new DriverManager().SetUpDriver(new EdgeConfig());
+                _webDriver = new EdgeDriver(driverPath);
+            }
+            else if (browserName == "Chrome")
+            {
+                new DriverManager().SetUpDriver(new ChromeConfig());
+                _webDriver = new ChromeDriver(driverPath);
+            }
         }
 
         
